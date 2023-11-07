@@ -1,4 +1,4 @@
-name: neuralhydrology
+name: nhgpu
 channels:
   - pytorch
   - nvidia
