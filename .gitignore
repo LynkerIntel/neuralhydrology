@@ -7,6 +7,8 @@
 .coverage
 
 # folder
+2023_train_lstm_for_nextgen/runs/*
+2023_colorado_swe/runs/*
 build/*
 dist/*
 neuralhydrology.egg-info/*
