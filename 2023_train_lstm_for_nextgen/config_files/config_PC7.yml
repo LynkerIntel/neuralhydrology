@@ -1,12 +1,12 @@
 # --- Experiment configurations --------------------------------------------------------------------
 
 # experiment name, used as folder name
-experiment_name: PC7_Attributes
+experiment_name: PC7_Attributes_seed1
 
 # files to specify training, validation and test basins (relative to code root or absolute path)
-train_basin_file: ./list_389_camels_basins_random.txt
-validation_basin_file: ./list_389_camels_basins_random.txt
-test_basin_file: ./list_131_camels_basins_random.txt
+train_basin_file: ./basin_lists/list_389_camels_basins_random.txt
+validation_basin_file: ./basin_lists/list_389_camels_basins_random.txt
+test_basin_file: ./basin_lists/list_131_camels_basins_random.txt
 
 # training, validation and test time periods (format = 'dd/mm/yyyy')
 train_start_date: "01/10/1989"
@@ -16,7 +16,7 @@ validation_end_date: "30/09/1985"
 test_start_date: "01/10/2009"
 test_end_date: "30/09/2014"
 
-seed: 0
+seed: 1
 
 # which GPU (id) to use [in format of cuda:0, cuda:1 etc, or cpu or None]
 device: cuda:0

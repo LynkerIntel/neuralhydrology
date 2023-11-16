@@ -4,9 +4,9 @@
 experiment_name: NOAH_MP_Attributes_hourly
 
 # files to specify training, validation and test basins (relative to code root or absolute path)
-train_basin_file: ./list_389_camels_basins_random.txt
-validation_basin_file: ./list_389_camels_basins_random.txt
-test_basin_file: ./list_131_camels_basins_random.txt
+train_basin_file: ./basin_lists/list_389_camels_basins_random.txt
+validation_basin_file: ./basin_lists/list_389_camels_basins_random.txt
+test_basin_file: ./basin_lists/list_131_camels_basins_random.txt
 
 # training, validation and test time periods (format = 'dd/mm/yyyy')
 train_start_date: "01/10/1989"
