@@ -59,6 +59,7 @@ class ColoradoSWE(BaseDataset):
                  additional_features: List[Dict[str, pd.DataFrame]] = [],
                  id_to_int: Dict[str, int] = {},
                  scaler: Dict[str, Union[pd.Series, xarray.DataArray]] = {}):
+        print("__init__ Colorado SWE data loader")
         super(ColoradoSWE, self).__init__(cfg=cfg,
                                        is_train=is_train,
                                        period=period,
@@ -126,8 +127,9 @@ def load_all_attributes(data_dir: Path, basins: List[str] = []) -> pd.DataFrame:
 
     # This loads in HydroAtlas attributes to the Camels Basins that already have their attributes
     df = load_camels_attributes(data_dir, camels_basins)
-    camels_hydroatlas_df, camels_hydroatlas_pca_df = load_camels_hydroatlas(data_dir, camels_basins)
-    df = add_hydroatlas_attributes_to_camels(df, camels_hydroatlas_df, camels_hydroatlas_pca_df)
+    if len(hydroatlas_basins) > 0:
+        camels_hydroatlas_df, camels_hydroatlas_pca_df = load_camels_hydroatlas(data_dir, camels_basins)
+        df = add_hydroatlas_attributes_to_camels(df, camels_hydroatlas_df, camels_hydroatlas_pca_df)
 
     # Filtering by basins if the list is not empty
     if basins:
@@ -160,6 +162,7 @@ def load_basin_forcings(data_dir: Path, basin_id: str, forcings: str) -> Tuple[p
     int
         Catchment area (m2), specified in the header of the forcing file.
     """
+    print(basin_id, basin_id, basin_id)
 
     with open(data_dir / "CAMELS_US/list_671_camels_basins.txt") as f:
         list_671_camels_basins = [line.rstrip() for line in f]
@@ -167,6 +170,7 @@ def load_basin_forcings(data_dir: Path, basin_id: str, forcings: str) -> Tuple[p
         list_colorado_hydroatlas_basins = [line.rstrip() for line in f]
 
     if basin_id in list_671_camels_basins:
+        print("Calling load_camels_daily_forcings")
         df, area = load_camels_daily_forcings(data_dir, basin_id, forcings)
         df = load_and_add_SWE_data_to_forcing(data_dir, df, basin_id)
     elif basin_id in list_colorado_hydroatlas_basins:
@@ -179,27 +183,119 @@ def load_basin_forcings(data_dir: Path, basin_id: str, forcings: str) -> Tuple[p
     return df, area
 
 def load_camels_daily_forcings(data_dir: Path, basin_id: str, forcings: str) -> Tuple[pd.DataFrame, int]:
-
+    """ Loads in forcing, adding logic to load data from ClimateR, which is in different format than NCAR Camels
+    """
+    print("loading_camels_daily_forcings")
+    print("loading_camels_daily_forcings")
     forcing_path = data_dir / 'CAMELS_US/basin_mean_forcing' / forcings
+    topo_attribute_path = data_dir / 'CAMELS_US/camels_attributes_v2.0/camels_topo.txt'
     if not forcing_path.is_dir():
         raise OSError(f"{forcing_path} does not exist")
 
-    file_path = list(forcing_path.glob(f'**/{basin_id}_*_forcing_leap.txt'))
-    if file_path:
-        file_path = file_path[0]
-    else:
-        raise FileNotFoundError(f'No file for Basin {basin_id} at {file_path}')
+    if forcings == "nldas_climater":
+        basin_id_int = int(basin_id)
+        basin_id_str = str(basin_id_int)
+        basin_id_str0 = str(basin_id_int).zfill(8)
+        print(basin_id_str0, basin_id_int)
+        #short name select vlevels units
+        # Tair: 1 1 K # Near surface air temperature
+        # Qair: 1 1 kg/kg # Near surface specific humidity
+        # SWdown: 1 1 W/m2 # Incident shortwave radiation (total)
+        # SWdirect: 0 1 W/m2 # Incident shortwave radiation (direct)
+        # SWdiffuse: 0 1 W/m2 # Incident shortwave radiation (diffuse)
+        # LWdown: 1 1 W/m2 # Incident longwave radiation
+        # Wind_E: 1 1 W/m2 # Eastward wind
+        # Wind_N: 1 1 m/s # Northward wind
+        # Psurf: 1 1 Pa # Surface pressure
+        # Rainf: 1 1 kg/m2s # Rainfall rate
+        # Snowf: 0 1 kg/m2s # Snowfall rate
+        # CRainf: 1 1 kg/m2s # Convective rainfall rate
+        forcing_var_list = [
+            "cape",
+            "crainf_frac",
+            "lwdown",
+            "psurf",
+            "qair",
+            "rainf",
+            "swdown",
+            "tair_max",
+            "tair_min",
+            "wind_e",
+            "wind_n",
+        ]
 
-    with open(file_path, 'r') as fp:
-        # load area from header
-        fp.readline()
-        fp.readline()
-        area = int(fp.readline())
-        # load the dataframe from the rest of the stream
-        df = pd.read_csv(fp, sep='\s+')
-        df["date"] = pd.to_datetime(df.Year.map(str) + "/" + df.Mnth.map(str) + "/" + df.Day.map(str),
-                                    format="%Y/%m/%d")
-        df = df.set_index("date")
+        print("forcing_var_list", forcing_var_list)
+
+        forcing_dict = {}
+
+        print("forcing_dict", forcing_dict)
+
+        for var in forcing_var_list:
+
+            print(f"loading in this variable: {var}, from here: {forcing_path / f'camels_{var}_qc.csv'} ")
+
+            forcing_dict[var] = pd.read_csv(forcing_path / f"camels_{var}_qc.csv", index_col='date', parse_dates=True)
+
+            print("should be loaded in now: ", forcing_dict[var])
+
+            print("first column is: ", list(forcing_dict[var])[0])
+            print("which is of this type: ", type(list(forcing_dict[var])[0]))
+
+            print("will isolate this column: ", forcing_dict[var][[basin_id_str]])
+
+            forcing_dict[var] = forcing_dict[var][[basin_id_str]].rename(columns={basin_id_str: var})
+
+        print("forcing_dict", forcing_dict)
+
+        # Combine all DataFrames into one, with unique column names
+        # combined_df = pd.concat([
+        #     [forcing_dict[var] for var in forcing_var_list],
+        # ], axis=1)
+        combined_df = pd.concat([forcing_dict[var] for var in forcing_var_list], axis=1)
+
+        print("combined_df", combined_df)
+
+        # Ensure all DataFrames have the same index before concatenation
+        df = combined_df.reindex(
+            pd.date_range(start=min(combined_df.index), end=max(combined_df.index), freq='D')
+        )
+
+        print("-----df-----\n", df)
+
+        df.index.name = 'date'  # Ensure the index name is 'date'
+
+        with open(topo_attribute_path, "r") as f:
+            topo_df = pd.read_csv(f, delimiter=";")
+            topo_df = topo_df.set_index("gauge_id")
+            print("topo_df")
+            print(topo_df)
+            print(topo_df.index.values[0])
+            print(type(topo_df.index.values[0]))
+            area = topo_df.loc[basin_id_int, "area_gages2"]
+
+        print("area", area)
+        print(df)
+
+
+    elif forcings in ["daymet", "maurer", "nldas"]:
+
+        file_path = list(forcing_path.glob(f'**/{basin_id}_*_forcing_leap.txt'))
+        if file_path:
+            file_path = file_path[0]
+        else:
+            raise FileNotFoundError(f'No file for Basin {basin_id} at {file_path}')
+
+        with open(file_path, 'r') as fp:
+            # load area from header
+            fp.readline()
+            fp.readline()
+            area = int(fp.readline())
+            # load the dataframe from the rest of the stream
+            df = pd.read_csv(fp, sep='\s+')
+            df["date"] = pd.to_datetime(df.Year.map(str) + "/" + df.Mnth.map(str) + "/" + df.Day.map(str),
+                                        format="%Y/%m/%d")
+            df = df.set_index("date")
+
     return df, area
 
 def load_all_discharge(data_dir: Path, basin: str, area: int) -> pd.Series:
@@ -263,6 +359,7 @@ def load_camels_hydroatlas(data_dir: Path, basins: List[str] = []) -> (pd.DataFr
             hydroatlas_df (dataframe): The dataframe of HydroAtlas attributes at Camels basins
             hydroatlas_pca_df (dataframe): The dataframe of PCA transformed HydroAtlas attributes at Camels basins
     """
+    print("Loading Camels HydroAtlas Attributes")
     # Load additional CSV files
     hydroatlas_path = data_dir / "CAMELS_US/hydroATLAS/hydroATLAS_Camels/camels_hydroatlas.csv"
     hydroatlas_pca_path = data_dir / "CAMELS_US/hydroATLAS/hydroATLAS_Camels/camels_hydroatlas_pca_transformed_all.csv"
