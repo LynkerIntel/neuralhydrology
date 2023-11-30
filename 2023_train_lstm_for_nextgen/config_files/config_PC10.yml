@@ -1,8 +1,7 @@
 # --- Experiment configurations --------------------------------------------------------------------
 
 # experiment name, used as folder name
-experiment_name: HA_10random_Attributes_e_seed6
-
+experiment_name: PC10_seed5
 # files to specify training, validation and test basins (relative to code root or absolute path)
 train_basin_file: ./basin_lists/list_389_camels_basins_random.txt
 validation_basin_file: ./basin_lists/list_389_camels_basins_random.txt
@@ -16,7 +15,7 @@ validation_end_date: "30/09/1985"
 test_start_date: "01/10/2009"
 test_end_date: "30/09/2014"
 
-seed: 6
+seed: 5
 
 # which GPU (id) to use [in format of cuda:0, cuda:1 etc, or cpu or None]
 device: cuda:0
@@ -129,16 +128,16 @@ dynamic_inputs:
   - Vp(Pa)
 
 static_attributes:
-  - run_mm_syr
-  - pre_mm_s07
-  - swc_pc_s07
-  - rdd_mk_sav
-  - glc_pc_s04
-  - swc_pc_syr
-  - pnv_pc_s15
-  - cmi_ix_s09
-  - pnv_pc_u03
-  - glc_pc_u20
+  - PC1
+  - PC2
+  - PC3
+  - PC4
+  - PC5
+  - PC6
+  - PC7
+  - PC8
+  - PC9
+  - PC10
 
 # which columns to use as target
 target_variables:

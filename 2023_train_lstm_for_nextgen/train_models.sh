@@ -11,10 +11,10 @@ nh-run train --config-file ./config_files/config_PC8.yml
 nh-run train --config-file ./config_files/config_PC9.yml
 nh-run train --config-file ./config_files/config_HA10random_a.yml
 nh-run train --config-file ./config_files/config_HA10random_b.yml
-nh-run train --config-file ./config_files/config_HA10random_c.yml
+#nh-run train --config-file ./config_files/config_HA10random_c.yml
 nh-run train --config-file ./config_files/config_HA10random_d.yml
-nh-run train --config-file ./config_files/config_HA10random_e.yml
+#nh-run train --config-file ./config_files/config_HA10random_e.yml
 nh-run train --config-file ./config_files/config_HA10random_f.yml
-nh-run train --config-file ./config_files/config_HA10random_g.yml
-nh-run train --config-file ./config_files/config_HA10random_h.yml
+#nh-run train --config-file ./config_files/config_HA10random_g.yml
+#nh-run train --config-file ./config_files/config_HA10random_h.yml
 nh-run train --config-file ./config_files/config_HA10random_i.yml

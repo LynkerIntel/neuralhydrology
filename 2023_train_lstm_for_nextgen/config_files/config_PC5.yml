@@ -1,7 +1,7 @@
 # --- Experiment configurations --------------------------------------------------------------------
 
 # experiment name, used as folder name
-experiment_name: PC5_Attributes_seed1
+experiment_name: PC5_Attributes_seed6
 
 # files to specify training, validation and test basins (relative to code root or absolute path)
 train_basin_file: ./basin_lists/list_389_camels_basins_random.txt
@@ -16,7 +16,7 @@ validation_end_date: "30/09/1985"
 test_start_date: "01/10/2009"
 test_end_date: "30/09/2014"
 
-seed: 1
+seed: 6
 
 # which GPU (id) to use [in format of cuda:0, cuda:1 etc, or cpu or None]
 device: cuda:0
