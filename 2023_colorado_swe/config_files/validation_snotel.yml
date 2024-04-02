@@ -1,14 +1,14 @@
 # --- Experiment configurations --------------------------------------------------------------------
 
 # experiment name, used as folder name
-experiment_name: prelim_XBASINIDX_noSWE_seedXSEEDX
+experiment_name: val_hs64_lossMSE_lr1e-3_HA_snotel_seed5
 
 # files to specify training, validation and test basins (relative to code root or absolute path)
-train_basin_file: ./basin_txt_files/leave_one_out/XBASINIDX_train.txt
-validation_basin_file: ./basin_txt_files/leave_one_out/XBASINIDX_train.txt
-test_basin_file: ./basin_txt_files/leave_one_out/XBASINIDX_test.txt
+train_basin_file: ./basin_txt_files/co_basins.txt
+validation_basin_file: ./basin_txt_files/co_basins.txt
+test_basin_file: ./basin_txt_files/co_basins.txt
 
-seed: XSEEDX
+seed: 5
 
 # training, validation and test time periods (format = 'dd/mm/yyyy')
 train_start_date: "01/10/2000"
@@ -24,16 +24,22 @@ device: cuda:0
 # --- Validation configuration ---------------------------------------------------------------------
 
 # specify after how many epochs to perform validation
-validate_every: 100
+validate_every: 1
 
 # specify how many random basins to use for validation
-validate_n_random_basins: 1
+validate_n_random_basins: 100
 
 # specify which metrics to calculate during validation (see neuralhydrology.evaluation.metrics)
 # this can either be a list or a dictionary. If a dictionary is used, the inner keys must match the name of the
 # target_variable specified below. Using dicts allows for different metrics per target variable.
 metrics:
   - NSE
+  - KGE
+  - Alpha-NSE
+  - Beta-NSE
+  - Pearson-r
+  - RMSE
+  - Peak-Timing
 
 # --- Model configuration --------------------------------------------------------------------------
 
@@ -69,7 +75,6 @@ loss: MSE
 # specify learning rates to use starting at specific epochs (0 is the initial learning rate)
 learning_rate:
   0: 1e-3
-  30: 1e-4
 
 # Mini-batch size
 batch_size: 256
@@ -95,13 +100,13 @@ num_workers: 8
 log_interval: 5
 
 # If true, writes logging results into tensorboard file
-log_tensorboard: False
+log_tensorboard: True
 
 # If a value and greater than 0, logs n random basins as figures during validation
-log_n_figures: 14
+log_n_figures: 0
 
 # Save model weights every n epochs
-save_weights_every: 10
+save_weights_every: 100
 
 # --- Data configurations --------------------------------------------------------------------------
 
@@ -117,6 +122,7 @@ forcings:
   - nldas
 
 dynamic_inputs:
+  - co_swe_snotel
   - PRCP(mm/day)
   - SRAD(W/m2)
   - Tmax(C)
@@ -132,14 +138,40 @@ clip_targets_to_zero:
   - QObs(mm/d)
 
 static_attributes:
-- prm_pc_sse
-- cly_pc_sav
-- slt_pc_sav
-- snd_pc_sav
-- soc_th_sav
-- kar_pc_sse
-- lka_pc_sse
-- gwt_cm_sav
-- slp_dg_sav
-- ele_mt_sav
-- snw_pc_syr
+  - prm_pc_sse
+  - cly_pc_sav
+  - slt_pc_sav
+  - snd_pc_sav
+  - soc_th_sav
+  - kar_pc_sse
+  - lka_pc_sse
+  - gwt_cm_sav
+  - slp_dg_sav
+  - ele_mt_sav
+  - snw_pc_syr
+# - elev_mean
+# - slope_mean
+# - area_gages2
+# - frac_forest
+# - lai_max
+# - lai_diff
+# - gvf_max
+# - gvf_diff
+# - soil_depth_pelletier
+# - soil_depth_statsgo
+# - soil_porosity
+# - soil_conductivity
+# - max_water_content
+# - sand_frac
+# - silt_frac
+# - clay_frac
+# - carbonate_rocks_frac
+# - geol_permeability
+# - p_mean
+# - pet_mean
+# - aridity
+# - frac_snow
+# - high_prec_freq
+# - high_prec_dur
+# - low_prec_freq
+# - low_prec_dur

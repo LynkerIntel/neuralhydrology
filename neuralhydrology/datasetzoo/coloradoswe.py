@@ -67,7 +67,36 @@ class ColoradoSWE(BaseDataset):
                                        additional_features=additional_features,
                                        id_to_int=id_to_int,
                                        scaler=scaler)
-
+        
+    def get_forcing_name_translation(self, input_filetype: str, var: str) -> str:
+        if input_filetype == "NLDAS":
+            var_dict = {"tair_max":"tmp2m_max",
+                        "tair_min":"tmp2m_min",
+                        "qair":"spfh2m",
+                        "psurf":"pressfc",
+                        "wind_e":"ugrd10m",
+                        "wind_n":"vgrd10m",
+                        "lwdown":"dlwrfsfc",
+                        "crainf_frac":"convfracsfc",
+                        "cape":"cape180_0mb",
+                        "potevap":"pevapsfc",
+                        "rainf":"apcpsfc",
+                        "swdown":"dswrfsfc"}
+        if input_filetype == "GRIB":
+            var_dict = {"tmp2m_max":"tair_max",
+                        "tmp2m_min":"tair_min",
+                        "spfh2m":"qair",
+                        "pressfc":"psurf",
+                        "ugrd10m":"wind_e",
+                        "vgrd10m":"wind_n",
+                        "dlwrfsfc":"lwdown",
+                        "convfracsfc":"crainf_frac",
+                        "cape180_0mb":"cape",
+                        "pevapsfc":"potevap",
+                        "apcpsfc":"rainf",
+                        "dswrfsfc":"swdown"}
+        return var_dict[var]
+    
     def _load_basin_data(self, basin: str) -> pd.DataFrame:
         """Load input and output data from text files."""
         # get forcings
@@ -247,10 +276,6 @@ def load_camels_daily_forcings(data_dir: Path, basin_id: str, forcings: str) -> 
 
         print("forcing_dict", forcing_dict)
 
-        # Combine all DataFrames into one, with unique column names
-        # combined_df = pd.concat([
-        #     [forcing_dict[var] for var in forcing_var_list],
-        # ], axis=1)
         combined_df = pd.concat([forcing_dict[var] for var in forcing_var_list], axis=1)
 
         print("combined_df", combined_df)
@@ -275,7 +300,6 @@ def load_camels_daily_forcings(data_dir: Path, basin_id: str, forcings: str) -> 
 
         print("area", area)
         print(df)
-
 
     elif forcings in ["daymet", "maurer", "nldas"]:
 
@@ -401,7 +425,8 @@ def load_and_add_SWE_data_to_forcing(data_dir, df, basin):
     df.loc[df_swe.index.values, "co_swe_ua"] = df_swe.loc[:,f"sum_{basin[1:]}"]
     df = df.loc["1999-10-01":, :]
     
-    swe_path = data_dir / 'CAMELS_US/colorado_swe' / 'co_camels_snotel_time_series.csv'
+#    swe_path = data_dir / 'CAMELS_US/colorado_swe' / 'co_camels_snotel_time_series.csv'
+    swe_path = data_dir / 'CAMELS_US/colorado_swe' / 'co_camels_snotel_krig_time_series.csv'
     if not swe_path.exists():
         raise OSError(f"{swe_path} does not exist")
     with open(swe_path, 'r') as fp:

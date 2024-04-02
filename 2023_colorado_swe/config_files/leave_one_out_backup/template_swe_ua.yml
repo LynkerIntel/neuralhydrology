@@ -1,7 +1,7 @@
 # --- Experiment configurations --------------------------------------------------------------------
 
 # experiment name, used as folder name
-experiment_name: prelim_XBASINIDX_noSWE_seedXSEEDX
+experiment_name: XBASINIDX_co_swe_ua_seedXSEEDX
 
 # files to specify training, validation and test basins (relative to code root or absolute path)
 train_basin_file: ./basin_txt_files/leave_one_out/XBASINIDX_train.txt
@@ -109,7 +109,7 @@ save_weights_every: 10
 dataset: colorado_swe
 
 # Path to data set root
-data_dir: ../data
+data_dir: ../data/CAMELS_US
 
 # Forcing product [daymet, maurer, maurer_extended, nldas, nldas_extended, nldas_hourly]
 # can be either a list of forcings or a single forcing product
@@ -117,6 +117,7 @@ forcings:
   - nldas
 
 dynamic_inputs:
+  - co_swe_ua
   - PRCP(mm/day)
   - SRAD(W/m2)
   - Tmax(C)

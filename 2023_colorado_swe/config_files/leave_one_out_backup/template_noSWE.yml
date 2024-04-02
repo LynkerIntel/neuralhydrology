@@ -1,7 +1,7 @@
 # --- Experiment configurations --------------------------------------------------------------------
 
 # experiment name, used as folder name
-experiment_name: XBASINIDX_withSWE_seedXSEEDX
+experiment_name: XBASINIDX_noSWE_seedXSEEDX
 
 # files to specify training, validation and test basins (relative to code root or absolute path)
 train_basin_file: ./basin_txt_files/leave_one_out/XBASINIDX_train.txt
@@ -24,10 +24,10 @@ device: cuda:0
 # --- Validation configuration ---------------------------------------------------------------------
 
 # specify after how many epochs to perform validation
-validate_every: 10
+validate_every: 100
 
 # specify how many random basins to use for validation
-validate_n_random_basins: 14
+validate_n_random_basins: 1
 
 # specify which metrics to calculate during validation (see neuralhydrology.evaluation.metrics)
 # this can either be a list or a dictionary. If a dictionary is used, the inner keys must match the name of the
@@ -50,7 +50,7 @@ output_activation: linear
 # ----> General settings <----
 
 # Number of cell states of the LSTM
-hidden_size: 20
+hidden_size: 64
 
 # Initial bias value of the forget gate
 initial_forget_bias: 3
@@ -68,11 +68,8 @@ loss: MSE
 
 # specify learning rates to use starting at specific epochs (0 is the initial learning rate)
 learning_rate:
-  0: 1e-2
-  5: 9e-3
-  10: 8e-3
-  30: 5e-3
-  40: 1e-3
+  0: 1e-3
+  30: 1e-4
 
 # Mini-batch size
 batch_size: 256
@@ -98,13 +95,13 @@ num_workers: 8
 log_interval: 5
 
 # If true, writes logging results into tensorboard file
-log_tensorboard: True
+log_tensorboard: False
 
 # If a value and greater than 0, logs n random basins as figures during validation
 log_n_figures: 14
 
 # Save model weights every n epochs
-save_weights_every: 1
+save_weights_every: 10
 
 # --- Data configurations --------------------------------------------------------------------------
 
@@ -120,7 +117,6 @@ forcings:
   - nldas
 
 dynamic_inputs:
-  - co_swe
   - PRCP(mm/day)
   - SRAD(W/m2)
   - Tmax(C)
@@ -136,29 +132,14 @@ clip_targets_to_zero:
   - QObs(mm/d)
 
 static_attributes:
-- elev_mean
-- slope_mean
-- area_gages2
-- frac_forest
-- lai_max
-- lai_diff
-- gvf_max
-- gvf_diff
-- soil_depth_pelletier
-- soil_depth_statsgo
-- soil_porosity
-- soil_conductivity
-- max_water_content
-- sand_frac
-- silt_frac
-- clay_frac
-- carbonate_rocks_frac
-- geol_permeability
-- p_mean
-- pet_mean
-- aridity
-- frac_snow
-- high_prec_freq
-- high_prec_dur
-- low_prec_freq
-- low_prec_dur
+- prm_pc_sse
+- cly_pc_sav
+- slt_pc_sav
+- snd_pc_sav
+- soc_th_sav
+- kar_pc_sse
+- lka_pc_sse
+- gwt_cm_sav
+- slp_dg_sav
+- ele_mt_sav
+- snw_pc_syr
