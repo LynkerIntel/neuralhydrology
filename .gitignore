@@ -19,3 +19,5 @@ configs/*
 .ipynb_checkpoints/
 data/*
 docs/build/*
+**/z_old/*
+**/data
