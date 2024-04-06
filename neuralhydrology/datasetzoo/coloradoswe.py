@@ -191,7 +191,6 @@ def load_basin_forcings(data_dir: Path, basin_id: str, forcings: str) -> Tuple[p
     int
         Catchment area (m2), specified in the header of the forcing file.
     """
-    print(basin_id, basin_id, basin_id)
 
     with open(data_dir / "CAMELS_US/list_671_camels_basins.txt") as f:
         list_671_camels_basins = [line.rstrip() for line in f]
@@ -199,7 +198,6 @@ def load_basin_forcings(data_dir: Path, basin_id: str, forcings: str) -> Tuple[p
         list_colorado_hydroatlas_basins = [line.rstrip() for line in f]
 
     if basin_id in list_671_camels_basins:
-        print("Calling load_camels_daily_forcings")
         df, area = load_camels_daily_forcings(data_dir, basin_id, forcings)
         df = load_and_add_SWE_data_to_forcing(data_dir, df, basin_id)
     elif basin_id in list_colorado_hydroatlas_basins:
@@ -214,8 +212,6 @@ def load_basin_forcings(data_dir: Path, basin_id: str, forcings: str) -> Tuple[p
 def load_camels_daily_forcings(data_dir: Path, basin_id: str, forcings: str) -> Tuple[pd.DataFrame, int]:
     """ Loads in forcing, adding logic to load data from ClimateR, which is in different format than NCAR Camels
     """
-    print("loading_camels_daily_forcings")
-    print("loading_camels_daily_forcings")
     forcing_path = data_dir / 'CAMELS_US/basin_mean_forcing' / forcings
     topo_attribute_path = data_dir / 'CAMELS_US/camels_attributes_v2.0/camels_topo.txt'
     if not forcing_path.is_dir():
@@ -225,7 +221,6 @@ def load_camels_daily_forcings(data_dir: Path, basin_id: str, forcings: str) -> 
         basin_id_int = int(basin_id)
         basin_id_str = str(basin_id_int)
         basin_id_str0 = str(basin_id_int).zfill(8)
-        print(basin_id_str0, basin_id_int)
         #short name select vlevels units
         # Tair: 1 1 K # Near surface air temperature
         # Qair: 1 1 kg/kg # Near surface specific humidity
@@ -253,53 +248,27 @@ def load_camels_daily_forcings(data_dir: Path, basin_id: str, forcings: str) -> 
             "wind_n",
         ]
 
-        print("forcing_var_list", forcing_var_list)
-
         forcing_dict = {}
-
-        print("forcing_dict", forcing_dict)
 
         for var in forcing_var_list:
 
-            print(f"loading in this variable: {var}, from here: {forcing_path / f'camels_{var}_qc.csv'} ")
-
             forcing_dict[var] = pd.read_csv(forcing_path / f"camels_{var}_qc.csv", index_col='date', parse_dates=True)
-
-            print("should be loaded in now: ", forcing_dict[var])
-
-            print("first column is: ", list(forcing_dict[var])[0])
-            print("which is of this type: ", type(list(forcing_dict[var])[0]))
-
-            print("will isolate this column: ", forcing_dict[var][[basin_id_str]])
 
             forcing_dict[var] = forcing_dict[var][[basin_id_str]].rename(columns={basin_id_str: var})
 
-        print("forcing_dict", forcing_dict)
-
         combined_df = pd.concat([forcing_dict[var] for var in forcing_var_list], axis=1)
-
-        print("combined_df", combined_df)
 
         # Ensure all DataFrames have the same index before concatenation
         df = combined_df.reindex(
             pd.date_range(start=min(combined_df.index), end=max(combined_df.index), freq='D')
         )
 
-        print("-----df-----\n", df)
-
         df.index.name = 'date'  # Ensure the index name is 'date'
 
         with open(topo_attribute_path, "r") as f:
             topo_df = pd.read_csv(f, delimiter=";")
             topo_df = topo_df.set_index("gauge_id")
-            print("topo_df")
-            print(topo_df)
-            print(topo_df.index.values[0])
-            print(type(topo_df.index.values[0]))
             area = topo_df.loc[basin_id_int, "area_gages2"]
-
-        print("area", area)
-        print(df)
 
     elif forcings in ["daymet", "maurer", "nldas"]:
 
@@ -422,7 +391,16 @@ def load_and_add_SWE_data_to_forcing(data_dir, df, basin):
     df_swe["date"] = pd.to_datetime(df_swe.timestamp.map(str),format="%Y-%m-%d")
     df_swe = df_swe.set_index("date")
     df_swe = df_swe.loc[:"2014-12-31", :]
-    df.loc[df_swe.index.values, "co_swe_ua"] = df_swe.loc[:,f"sum_{basin[1:]}"]
+
+    # jmframe (20240404): Adding a logic statement, to insert random numbers if 
+    # the basin is not in the dataframe/csv of the snow.
+    column_name_ua = f"sum_{basin[1:]}"
+    if column_name_ua in df_swe.columns:
+        df.loc[df_swe.index.values, "co_swe_ua"] = df_swe[column_name_ua]
+    else:
+        # Insert random number uniformly distributed between 0 and 1
+        df.loc[df_swe.index.values, "co_swe_ua"] = np.random.uniform(0, 1, size=len(df_swe.index))
+
     df = df.loc["1999-10-01":, :]
     
 #    swe_path = data_dir / 'CAMELS_US/colorado_swe' / 'co_camels_snotel_time_series.csv'
@@ -434,7 +412,16 @@ def load_and_add_SWE_data_to_forcing(data_dir, df, basin):
     df_swe["date"] = pd.to_datetime(df_swe.Date.map(str),format="%Y-%m-%d")
     df_swe = df_swe.set_index("date")
     df_swe = df_swe.loc[:"2014-12-31", :]
-    df.loc[df_swe.index.values, "co_swe_snotel"] = df_swe.loc[:,f"{basin[1:]}"]
+
+    # jmframe (20240404): Adding a logic statement, to insert random numbers if 
+    # the basin is not in the dataframe/csv of the snow.
+    column_name_snotel = basin[1:]
+    if column_name_snotel in df_swe.columns:
+        df.loc[df_swe.index.values, "co_swe_snotel"] = df_swe[column_name_snotel]
+    else:
+        # Insert random number uniformly distributed between 0 and 1
+        df.loc[df_swe.index.values, "co_swe_snotel"] = np.random.uniform(0, 1, size=len(df_swe.index))
+
     df = df.loc["2000-10-01":, :]
 
     return df
@@ -477,9 +464,6 @@ def load_hydroatlas12_daily_forcing(data_dir: Path, basin: str):
     )
 
     df.index.name = 'date'  # Ensure the index name is 'date'
-
-    print(df.head())
-    print("-----------------------------------------")
 
     return df
     
