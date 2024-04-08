@@ -59,7 +59,6 @@ class ColoradoSWE(BaseDataset):
                  additional_features: List[Dict[str, pd.DataFrame]] = [],
                  id_to_int: Dict[str, int] = {},
                  scaler: Dict[str, Union[pd.Series, xarray.DataArray]] = {}):
-        print("__init__ Colorado SWE data loader")
         super(ColoradoSWE, self).__init__(cfg=cfg,
                                        is_train=is_train,
                                        period=period,
@@ -389,6 +388,7 @@ def load_and_add_SWE_data_to_forcing(data_dir, df, basin):
     with open(swe_path, 'r') as fp:
         df_swe = pd.read_csv(fp)
     df_swe["date"] = pd.to_datetime(df_swe.timestamp.map(str),format="%Y-%m-%d")
+    df_swe = df_swe.drop(["timestamp"], axis=1)
     df_swe = df_swe.set_index("date")
     df_swe = df_swe.loc[:"2014-12-31", :]
 
@@ -398,8 +398,9 @@ def load_and_add_SWE_data_to_forcing(data_dir, df, basin):
     if column_name_ua in df_swe.columns:
         df.loc[df_swe.index.values, "co_swe_ua"] = df_swe[column_name_ua]
     else:
-        # Insert random number uniformly distributed between 0 and 1
-        df.loc[df_swe.index.values, "co_swe_ua"] = np.random.uniform(0, 1, size=len(df_swe.index))
+        mean_co_swe = np.mean(df_swe.values, axis=1)
+        random_noiz = np.random.normal(0, 0.15, size=len(df_swe.index))
+        df.loc[df_swe.index.values, "co_swe_ua"] = mean_co_swe + random_noiz
 
     df = df.loc["1999-10-01":, :]
     
@@ -410,6 +411,7 @@ def load_and_add_SWE_data_to_forcing(data_dir, df, basin):
     with open(swe_path, 'r') as fp:
         df_swe = pd.read_csv(fp)
     df_swe["date"] = pd.to_datetime(df_swe.Date.map(str),format="%Y-%m-%d")
+    df_swe = df_swe.drop(["Date"], axis=1)
     df_swe = df_swe.set_index("date")
     df_swe = df_swe.loc[:"2014-12-31", :]
 
@@ -419,8 +421,9 @@ def load_and_add_SWE_data_to_forcing(data_dir, df, basin):
     if column_name_snotel in df_swe.columns:
         df.loc[df_swe.index.values, "co_swe_snotel"] = df_swe[column_name_snotel]
     else:
-        # Insert random number uniformly distributed between 0 and 1
-        df.loc[df_swe.index.values, "co_swe_snotel"] = np.random.uniform(0, 1, size=len(df_swe.index))
+        mean_co_swe = np.mean(df_swe.values, axis=1)
+        random_noiz = np.random.normal(0, 0.15, size=len(df_swe.index))
+        df.loc[df_swe.index.values, "co_swe_snotel"] = mean_co_swe + random_noiz
 
     df = df.loc["2000-10-01":, :]
 

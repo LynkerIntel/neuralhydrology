@@ -125,13 +125,13 @@ forcings:
   - nldas
 
 dynamic_inputs:
-  - co_swe_snotel
   - PRCP(mm/day)
   - SRAD(W/m2)
   - Tmax(C)
   - Tmin(C)
   - Vp(Pa)
-
+  - co_swe_snotel
+  
 # which columns to use as target
 target_variables:
   - QObs(mm/d)

@@ -23,4 +23,4 @@ epochs: 10
 finetune_modules:
 - head
 - lstm
-base_run_dir: /home/jonat/nh-lyker/2023_colorado_swe/runs/pretrain_hs64_lossMSE_lr1e-3down_HA_snotel_seed5_0504_162423
+base_run_dir: /home/jonat/nh-lyker/2023_colorado_swe/runs/pretrain_hs64_lossMSE_lr1e-3down_HA_snotel_seed5_0804_143004
