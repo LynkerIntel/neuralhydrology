@@ -133,7 +133,6 @@ dynamic_inputs:
   - Tmax(C)
   - Tmin(C)
   - Vp(Pa)
-  - co_swe_snotel
 
 # which columns to use as target
 target_variables:
