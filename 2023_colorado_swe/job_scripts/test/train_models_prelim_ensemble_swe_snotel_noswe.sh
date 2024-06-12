@@ -1,4 +1,4 @@
-#!/bin/bash
+!/bin/bash
 nh-run train --config-file ./config_files/leave_one_out/06614800_swe_snotel_0.yml
 nh-run train --config-file ./config_files/leave_one_out/06614800_swe_snotel_1.yml
 nh-run train --config-file ./config_files/leave_one_out/06614800_swe_snotel_2.yml
