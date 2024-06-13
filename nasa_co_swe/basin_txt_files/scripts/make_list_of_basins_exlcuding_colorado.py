@@ -1,18 +1,21 @@
 #!/home/jonat/anaconda3/envs/nh_cuda/bin/python
 
 co_basins_path = "../co_camels_basins.txt"  # Path to co_basins.txt
-list_671_camels_basins_path = "../camels_671.txt"  # Path to list_671_camels_basins.txt
-output_path = "excluding_co_camels_basin_671.txt"  # Path for the output file
+#list_camels_basins_path = "../camels_671.txt"  # Path to list_671_camels_basins.txt
+#output_path = "excluding_co_camels_basin_671.txt"  # Path for the output file
+
+list_camels_basins_path = "../camels_531.txt"  # Path to list_531_camels_basins.txt
+output_path = "excluding_co_camels_basins_531.txt"  # Path for the output file
 
 # Read in the content of both files
 with open(co_basins_path, 'r') as file:
     co_basins = set(file.read().splitlines())
 
-with open(list_671_camels_basins_path, 'r') as file:
-    list_671_camels_basins = set(file.read().splitlines())
+with open(list_camels_basins_path, 'r') as file:
+    list_camels_basins_path = set(file.read().splitlines())
 
 # Find the difference between the two sets
-exclusive_basins = list_671_camels_basins - co_basins
+exclusive_basins = list_camels_basins_path - co_basins
 
 # Write the exclusive basins to a new file
 with open(output_path, 'w') as file:

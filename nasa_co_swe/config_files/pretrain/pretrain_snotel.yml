@@ -4,9 +4,9 @@
 experiment_name: pretrain_hs128_lossMSE_lr1e-3down_HA_snotel_seed4
 
 # files to specify training, validation and test basins (relative to code root or absolute path)
-train_basin_file: ./basin_txt_files/excluding_co_camels_basins.txt
-validation_basin_file: ./basin_txt_files/co_basins.txt
-test_basin_file: ./basin_txt_files/co_basins.txt
+train_basin_file: ../../basin_txt_files/excluding_co_camels_basins_531.txt
+validation_basin_file: ../../basin_txt_files/co_camels_basins.txt
+test_basin_file: ../../basin_txt_files/co_camels_basins.txt
 
 seed: 4
 
@@ -19,7 +19,8 @@ test_start_date: "01/10/2010"
 test_end_date: "30/09/2014"
 
 # which GPU (id) to use [in format of cuda:0, cuda:1 etc, or cpu or None]
-device: cuda:0
+#device: cuda:0
+device: mps
 
 # --- Validation configuration ---------------------------------------------------------------------
 
@@ -121,7 +122,7 @@ save_weights_every: 5
 dataset: colorado_swe
 
 # Path to data set root
-data_dir: ../data
+data_dir: ../../../data
 
 # Forcing product [daymet, maurer, maurer_extended, nldas, nldas_extended, nldas_hourly]
 # can be either a list of forcings or a single forcing product
