@@ -1,8 +1,8 @@
 #!/home/jonat/anaconda3/envs/nh_cuda/bin/python
 
 co_basins_path = "../co_camels_basins.txt"  # Path to co_basins.txt
-list_671_camels_basins_path = "/mnt/d/nh/CAMELS_US/list_671_camels_basins.txt"  # Path to list_671_camels_basins.txt
-output_path = "excluding_co_camels_basins.txt"  # Path for the output file
+list_671_camels_basins_path = "../camels_671.txt"  # Path to list_671_camels_basins.txt
+output_path = "excluding_co_camels_basin_671.txt"  # Path for the output file
 
 # Read in the content of both files
 with open(co_basins_path, 'r') as file:

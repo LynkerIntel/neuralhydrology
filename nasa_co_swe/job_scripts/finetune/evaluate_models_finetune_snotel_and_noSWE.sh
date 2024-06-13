@@ -1,71 +1,71 @@
 #!/bin/bash
-nh-run evaluate --run-dir ./runs/finetune_pretrain_hs128_lossMSE_lr1e-3down_HA_noSWE_seed101_0904_162452
-nh-run evaluate --run-dir ./runs/finetune_pretrain_hs128_lossMSE_lr1e-3down_HA_noSWE_seed102_0904_162558
-nh-run evaluate --run-dir ./runs/finetune_pretrain_hs128_lossMSE_lr1e-3down_HA_noSWE_seed1_0804_160431_0904_162818
-nh-run evaluate --run-dir ./runs/finetune_pretrain_hs128_lossMSE_lr1e-3down_HA_noSWE_seed201_0904_162931
-nh-run evaluate --run-dir ./runs/finetune_pretrain_hs128_lossMSE_lr1e-3down_HA_noSWE_seed202_0904_163036
-nh-run evaluate --run-dir ./runs/finetune_pretrain_hs128_lossMSE_lr1e-3down_HA_noSWE_seed2_0804_172628_0904_163313
-nh-run evaluate --run-dir ./runs/finetune_pretrain_hs128_lossMSE_lr1e-3down_HA_noSWE_seed301_0904_163425
-nh-run evaluate --run-dir ./runs/finetune_pretrain_hs128_lossMSE_lr1e-3down_HA_noSWE_seed302_0904_163548
-nh-run evaluate --run-dir ./runs/finetune_pretrain_hs128_lossMSE_lr1e-3down_HA_noSWE_seed3_0804_201045_0904_163658
-nh-run evaluate --run-dir ./runs/finetune_pretrain_hs128_lossMSE_lr1e-3down_HA_noSWE_seed401_0904_163814
-nh-run evaluate --run-dir ./runs/finetune_pretrain_hs128_lossMSE_lr1e-3down_HA_noSWE_seed402_0904_163912
-nh-run evaluate --run-dir ./runs/finetune_pretrain_hs128_lossMSE_lr1e-3down_HA_noSWE_seed4_0904_074416_0904_164141
-nh-run evaluate --run-dir ./runs/finetune_pretrain_hs128_lossMSE_lr1e-3down_HA_snotel_seed101_0904_164435
-nh-run evaluate --run-dir ./runs/finetune_pretrain_hs128_lossMSE_lr1e-3down_HA_snotel_seed102_0904_164536
-nh-run evaluate --run-dir ./runs/finetune_pretrain_hs128_lossMSE_lr1e-3down_HA_snotel_seed1_0804_154406_0904_164711
-nh-run evaluate --run-dir ./runs/finetune_pretrain_hs128_lossMSE_lr1e-3down_HA_snotel_seed201_0904_164824
-nh-run evaluate --run-dir ./runs/finetune_pretrain_hs128_lossMSE_lr1e-3down_HA_snotel_seed202_0904_164948
-nh-run evaluate --run-dir ./runs/finetune_pretrain_hs128_lossMSE_lr1e-3down_HA_snotel_seed2_0804_170553_0904_165113
-nh-run evaluate --run-dir ./runs/finetune_pretrain_hs128_lossMSE_lr1e-3down_HA_snotel_seed301_0904_165322
-nh-run evaluate --run-dir ./runs/finetune_pretrain_hs128_lossMSE_lr1e-3down_HA_snotel_seed302_0904_165427
-nh-run evaluate --run-dir ./runs/finetune_pretrain_hs128_lossMSE_lr1e-3down_HA_snotel_seed3_0804_195033_0904_165548
-nh-run evaluate --run-dir ./runs/finetune_pretrain_hs128_lossMSE_lr1e-3down_HA_snotel_seed401_0904_165741
-nh-run evaluate --run-dir ./runs/finetune_pretrain_hs128_lossMSE_lr1e-3down_HA_snotel_seed402_0904_165916
-nh-run evaluate --run-dir ./runs/finetune_pretrain_hs128_lossMSE_lr1e-3down_HA_snotel_seed4_0904_072341_0904_170032
+nh-run evaluate --run-dir ../../runs/finetune_pretrain_hs128_lossMSE_lr1e-3down_HA_noSWE_seed101_0904_162452
+nh-run evaluate --run-dir ../../runs/finetune_pretrain_hs128_lossMSE_lr1e-3down_HA_noSWE_seed102_0904_162558
+nh-run evaluate --run-dir ../../runs/finetune_pretrain_hs128_lossMSE_lr1e-3down_HA_noSWE_seed1_0804_160431_0904_162818
+nh-run evaluate --run-dir ../../runs/finetune_pretrain_hs128_lossMSE_lr1e-3down_HA_noSWE_seed201_0904_162931
+nh-run evaluate --run-dir ../../runs/finetune_pretrain_hs128_lossMSE_lr1e-3down_HA_noSWE_seed202_0904_163036
+nh-run evaluate --run-dir ../../runs/finetune_pretrain_hs128_lossMSE_lr1e-3down_HA_noSWE_seed2_0804_172628_0904_163313
+nh-run evaluate --run-dir ../../runs/finetune_pretrain_hs128_lossMSE_lr1e-3down_HA_noSWE_seed301_0904_163425
+nh-run evaluate --run-dir ../../runs/finetune_pretrain_hs128_lossMSE_lr1e-3down_HA_noSWE_seed302_0904_163548
+nh-run evaluate --run-dir ../../runs/finetune_pretrain_hs128_lossMSE_lr1e-3down_HA_noSWE_seed3_0804_201045_0904_163658
+nh-run evaluate --run-dir ../../runs/finetune_pretrain_hs128_lossMSE_lr1e-3down_HA_noSWE_seed401_0904_163814
+nh-run evaluate --run-dir ../../runs/finetune_pretrain_hs128_lossMSE_lr1e-3down_HA_noSWE_seed402_0904_163912
+nh-run evaluate --run-dir ../../runs/finetune_pretrain_hs128_lossMSE_lr1e-3down_HA_noSWE_seed4_0904_074416_0904_164141
+nh-run evaluate --run-dir ../../runs/finetune_pretrain_hs128_lossMSE_lr1e-3down_HA_snotel_seed101_0904_164435
+nh-run evaluate --run-dir ../../runs/finetune_pretrain_hs128_lossMSE_lr1e-3down_HA_snotel_seed102_0904_164536
+nh-run evaluate --run-dir ../../runs/finetune_pretrain_hs128_lossMSE_lr1e-3down_HA_snotel_seed1_0804_154406_0904_164711
+nh-run evaluate --run-dir ../../runs/finetune_pretrain_hs128_lossMSE_lr1e-3down_HA_snotel_seed201_0904_164824
+nh-run evaluate --run-dir ../../runs/finetune_pretrain_hs128_lossMSE_lr1e-3down_HA_snotel_seed202_0904_164948
+nh-run evaluate --run-dir ../../runs/finetune_pretrain_hs128_lossMSE_lr1e-3down_HA_snotel_seed2_0804_170553_0904_165113
+nh-run evaluate --run-dir ../../runs/finetune_pretrain_hs128_lossMSE_lr1e-3down_HA_snotel_seed301_0904_165322
+nh-run evaluate --run-dir ../../runs/finetune_pretrain_hs128_lossMSE_lr1e-3down_HA_snotel_seed302_0904_165427
+nh-run evaluate --run-dir ../../runs/finetune_pretrain_hs128_lossMSE_lr1e-3down_HA_snotel_seed3_0804_195033_0904_165548
+nh-run evaluate --run-dir ../../runs/finetune_pretrain_hs128_lossMSE_lr1e-3down_HA_snotel_seed401_0904_165741
+nh-run evaluate --run-dir ../../runs/finetune_pretrain_hs128_lossMSE_lr1e-3down_HA_snotel_seed402_0904_165916
+nh-run evaluate --run-dir ../../runs/finetune_pretrain_hs128_lossMSE_lr1e-3down_HA_snotel_seed4_0904_072341_0904_170032
 
-# nh-run evaluate --run-dir ./runs/prelim_06614800_co_swe_snotel_seed0_0304_084651
-# nh-run evaluate --run-dir ./runs/prelim_06614800_co_swe_snotel_seed1_0304_084817
-# nh-run evaluate --run-dir ./runs/prelim_06614800_co_swe_snotel_seed2_0304_084945
-# nh-run evaluate --run-dir ./runs/prelim_06746095_co_swe_snotel_seed0_0304_085112
-# nh-run evaluate --run-dir ./runs/prelim_06746095_co_swe_snotel_seed1_0304_085238
-# nh-run evaluate --run-dir ./runs/prelim_06746095_co_swe_snotel_seed2_0304_085406
-# nh-run evaluate --run-dir ./runs/prelim_07083000_co_swe_snotel_seed0_0304_085533
-# nh-run evaluate --run-dir ./runs/prelim_07083000_co_swe_snotel_seed1_0304_085700
-# nh-run evaluate --run-dir ./runs/prelim_07083000_co_swe_snotel_seed2_0304_085827
-# nh-run evaluate --run-dir ./runs/prelim_09034900_co_swe_snotel_seed0_0304_085955
-# nh-run evaluate --run-dir ./runs/prelim_09034900_co_swe_snotel_seed1_0304_090122
-# nh-run evaluate --run-dir ./runs/prelim_09034900_co_swe_snotel_seed2_0304_090247
-# nh-run evaluate --run-dir ./runs/prelim_09035800_co_swe_snotel_seed0_0304_090413
-# nh-run evaluate --run-dir ./runs/prelim_09035800_co_swe_snotel_seed1_0304_090541
-# nh-run evaluate --run-dir ./runs/prelim_09035800_co_swe_snotel_seed2_0304_090708
-# nh-run evaluate --run-dir ./runs/prelim_09035900_co_swe_snotel_seed0_0304_090834
-# nh-run evaluate --run-dir ./runs/prelim_09035900_co_swe_snotel_seed1_0304_091001
-# nh-run evaluate --run-dir ./runs/prelim_09035900_co_swe_snotel_seed2_0304_091125
-# nh-run evaluate --run-dir ./runs/prelim_09047700_co_swe_snotel_seed0_0304_091249
-# nh-run evaluate --run-dir ./runs/prelim_09047700_co_swe_snotel_seed1_0304_091415
-# nh-run evaluate --run-dir ./runs/prelim_09047700_co_swe_snotel_seed2_0304_091542
-# nh-run evaluate --run-dir ./runs/prelim_09065500_co_swe_snotel_seed0_0304_091709
-# nh-run evaluate --run-dir ./runs/prelim_09065500_co_swe_snotel_seed1_0304_091838
-# nh-run evaluate --run-dir ./runs/prelim_09065500_co_swe_snotel_seed2_0304_092004
-# nh-run evaluate --run-dir ./runs/prelim_09066000_co_swe_snotel_seed0_0304_092132
-# nh-run evaluate --run-dir ./runs/prelim_09066000_co_swe_snotel_seed1_0304_092258
-# nh-run evaluate --run-dir ./runs/prelim_09066000_co_swe_snotel_seed2_0304_092421
-# nh-run evaluate --run-dir ./runs/prelim_09066200_co_swe_snotel_seed0_0304_092545
-# nh-run evaluate --run-dir ./runs/prelim_09066200_co_swe_snotel_seed1_0304_092711
-# nh-run evaluate --run-dir ./runs/prelim_09066200_co_swe_snotel_seed2_0304_092835
-# nh-run evaluate --run-dir ./runs/prelim_09066300_co_swe_snotel_seed0_0304_093001
-# nh-run evaluate --run-dir ./runs/prelim_09066300_co_swe_snotel_seed1_0304_093126
-# nh-run evaluate --run-dir ./runs/prelim_09066300_co_swe_snotel_seed2_0304_093251
-# nh-run evaluate --run-dir ./runs/prelim_09081600_co_swe_snotel_seed0_0304_093417
-# nh-run evaluate --run-dir ./runs/prelim_09081600_co_swe_snotel_seed1_0304_093544
-# nh-run evaluate --run-dir ./runs/prelim_09081600_co_swe_snotel_seed2_0304_093711
-# nh-run evaluate --run-dir ./runs/prelim_09107000_co_swe_snotel_seed0_0304_093836
-# nh-run evaluate --run-dir ./runs/prelim_09107000_co_swe_snotel_seed1_0304_094000
-# nh-run evaluate --run-dir ./runs/prelim_09107000_co_swe_snotel_seed2_0304_094126
-# nh-run evaluate --run-dir ./runs/prelim_09306242_co_swe_snotel_seed0_0304_094250
-# nh-run evaluate --run-dir ./runs/prelim_09306242_co_swe_snotel_seed1_0304_094416
-# nh-run evaluate --run-dir ./runs/prelim_09306242_co_swe_snotel_seed2_0304_094543
-# nh-run evaluate --run-dir ./runs/prelim_09352900_co_swe_snotel_seed0_0304_094708
-# nh-run evaluate --run-dir ./runs/prelim_09352900_co_swe_snotel_seed1_0304_094834
-# nh-run evaluate --run-dir ./runs/prelim_09352900_co_swe_snotel_seed2_0304_094959
+# nh-run evaluate --run-dir ../../runs/prelim_06614800_co_swe_snotel_seed0_0304_084651
+# nh-run evaluate --run-dir ../../runs/prelim_06614800_co_swe_snotel_seed1_0304_084817
+# nh-run evaluate --run-dir ../../runs/prelim_06614800_co_swe_snotel_seed2_0304_084945
+# nh-run evaluate --run-dir ../../runs/prelim_06746095_co_swe_snotel_seed0_0304_085112
+# nh-run evaluate --run-dir ../../runs/prelim_06746095_co_swe_snotel_seed1_0304_085238
+# nh-run evaluate --run-dir ../../runs/prelim_06746095_co_swe_snotel_seed2_0304_085406
+# nh-run evaluate --run-dir ../../runs/prelim_07083000_co_swe_snotel_seed0_0304_085533
+# nh-run evaluate --run-dir ../../runs/prelim_07083000_co_swe_snotel_seed1_0304_085700
+# nh-run evaluate --run-dir ../../runs/prelim_07083000_co_swe_snotel_seed2_0304_085827
+# nh-run evaluate --run-dir ../../runs/prelim_09034900_co_swe_snotel_seed0_0304_085955
+# nh-run evaluate --run-dir ../../runs/prelim_09034900_co_swe_snotel_seed1_0304_090122
+# nh-run evaluate --run-dir ../../runs/prelim_09034900_co_swe_snotel_seed2_0304_090247
+# nh-run evaluate --run-dir ../../runs/prelim_09035800_co_swe_snotel_seed0_0304_090413
+# nh-run evaluate --run-dir ../../runs/prelim_09035800_co_swe_snotel_seed1_0304_090541
+# nh-run evaluate --run-dir ../../runs/prelim_09035800_co_swe_snotel_seed2_0304_090708
+# nh-run evaluate --run-dir ../../runs/prelim_09035900_co_swe_snotel_seed0_0304_090834
+# nh-run evaluate --run-dir ../../runs/prelim_09035900_co_swe_snotel_seed1_0304_091001
+# nh-run evaluate --run-dir ../../runs/prelim_09035900_co_swe_snotel_seed2_0304_091125
+# nh-run evaluate --run-dir ../../runs/prelim_09047700_co_swe_snotel_seed0_0304_091249
+# nh-run evaluate --run-dir ../../runs/prelim_09047700_co_swe_snotel_seed1_0304_091415
+# nh-run evaluate --run-dir ../../runs/prelim_09047700_co_swe_snotel_seed2_0304_091542
+# nh-run evaluate --run-dir ../../runs/prelim_09065500_co_swe_snotel_seed0_0304_091709
+# nh-run evaluate --run-dir ../../runs/prelim_09065500_co_swe_snotel_seed1_0304_091838
+# nh-run evaluate --run-dir ../../runs/prelim_09065500_co_swe_snotel_seed2_0304_092004
+# nh-run evaluate --run-dir ../../runs/prelim_09066000_co_swe_snotel_seed0_0304_092132
+# nh-run evaluate --run-dir ../../runs/prelim_09066000_co_swe_snotel_seed1_0304_092258
+# nh-run evaluate --run-dir ../../runs/prelim_09066000_co_swe_snotel_seed2_0304_092421
+# nh-run evaluate --run-dir ../../runs/prelim_09066200_co_swe_snotel_seed0_0304_092545
+# nh-run evaluate --run-dir ../../runs/prelim_09066200_co_swe_snotel_seed1_0304_092711
+# nh-run evaluate --run-dir ../../runs/prelim_09066200_co_swe_snotel_seed2_0304_092835
+# nh-run evaluate --run-dir ../../runs/prelim_09066300_co_swe_snotel_seed0_0304_093001
+# nh-run evaluate --run-dir ../../runs/prelim_09066300_co_swe_snotel_seed1_0304_093126
+# nh-run evaluate --run-dir ../../runs/prelim_09066300_co_swe_snotel_seed2_0304_093251
+# nh-run evaluate --run-dir ../../runs/prelim_09081600_co_swe_snotel_seed0_0304_093417
+# nh-run evaluate --run-dir ../../runs/prelim_09081600_co_swe_snotel_seed1_0304_093544
+# nh-run evaluate --run-dir ../../runs/prelim_09081600_co_swe_snotel_seed2_0304_093711
+# nh-run evaluate --run-dir ../../runs/prelim_09107000_co_swe_snotel_seed0_0304_093836
+# nh-run evaluate --run-dir ../../runs/prelim_09107000_co_swe_snotel_seed1_0304_094000
+# nh-run evaluate --run-dir ../../runs/prelim_09107000_co_swe_snotel_seed2_0304_094126
+# nh-run evaluate --run-dir ../../runs/prelim_09306242_co_swe_snotel_seed0_0304_094250
+# nh-run evaluate --run-dir ../../runs/prelim_09306242_co_swe_snotel_seed1_0304_094416
+# nh-run evaluate --run-dir ../../runs/prelim_09306242_co_swe_snotel_seed2_0304_094543
+# nh-run evaluate --run-dir ../../runs/prelim_09352900_co_swe_snotel_seed0_0304_094708
+# nh-run evaluate --run-dir ../../runs/prelim_09352900_co_swe_snotel_seed1_0304_094834
+# nh-run evaluate --run-dir ../../runs/prelim_09352900_co_swe_snotel_seed2_0304_094959
