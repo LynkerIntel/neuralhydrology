@@ -3,7 +3,7 @@ from typing import Dict
 import torch
 import torch.nn as nn
 
-from neuralhydrology.evaluation.utils import load_scaler
+from neuralhydrology.datautils.utils import load_scaler
 from neuralhydrology.utils.config import Config
 from neuralhydrology.utils.samplingutils import sample_pointpredictions, umal_extend_batch
 
@@ -73,7 +73,7 @@ class BaseModel(nn.Module):
         raise NotImplementedError
 
     def pre_model_hook(self, data: Dict[str, torch.Tensor], is_train: bool) -> Dict[str, torch.Tensor]:
-        """A function to execute before the model in training, validaton and test. 
+        """A function to execute before the model in training, validation and test. 
         The beahvior can be adapted depending on the run configuration and the provided arguments.
 
         Parameters
