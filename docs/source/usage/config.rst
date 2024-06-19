@@ -225,6 +225,14 @@ These are used if ``model == mtslstm``.
    current input timescale. In both cases, ``transfer_mtslstm_states``
    can be used to configure hidden and cell state transfer.
 
+Mamba settings
+~~~~~~~~~~~~~~
+These are used if ``model == mamba``.
+
+-  ``mamba_d_conv``: Local convolution width
+-  ``mamba_d_state``: State Space Model state expansion factor
+-  ``mamba_expand``: Block expansion factor
+
 Transformer settings
 ~~~~~~~~~~~~~~~~~~~~
 
@@ -269,6 +277,20 @@ These are used if ``model == mclstm``.
    over time. Currently, the MC-LSTM configuration implemented here only supports a single mass input. Make sure to
    exclude this feature from the default normalization (see :ref:`MC-LSTM <MC-LSTM>` description).
 
+Hybrid-Model settings
+~~~~~~~~~~~~~~~~~~~~~
+
+These are used if ``model == hybrid_model``.
+
+- ``conceptual_model``: Name of the hydrological conceptual model that is used together with a data-driven method to
+  create the hybrid model e.g., [``SHM``].
+
+-  ``dynamic_conceptual_inputs``: List of features that are used as input in the conceptual part of the hybrid
+   model.
+
+-  ``warmup_period``: Number of time steps (e.g. days) before the information produced by the data-driven part is used
+   in the conceptual model.
+
 Handoff Forecast Model settings
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -312,7 +334,8 @@ the EA-LSTM model. For multi-timescale models, these settings can be ignored.
    - ``type`` (default 'fc'): Type of the embedding net. Currently, only 'fc' for fully-connected net is supported.
    - ``hiddens``: List of integers that define the number of neurons per layer in the fully connected network.
      The last number is the number of output neurons. Must have at least length one.
-   - ``activation`` (default 'tanh'): activation function of the network. Supported values are 'tanh', 'sigmoid', 'linear'.
+   - ``activation`` (default 'tanh'): activation function of the network. Supported values are:
+     'tanh', 'sigmoid', 'linear', and 'relu'.
      The activation function is not applied to the output neurons, which always have a linear activation function.
      An activation function for the output neurons has to be applied in the main model class.
    - ``dropout`` (default 0.0): Dropout rate applied to the embedding network.
@@ -327,7 +350,7 @@ Training settings
 -----------------
 
 -  ``optimizer``: Specify which optimizer to use. Currently supported
-   is Adam (standard). New optimizers can be added
+   are Adam and AdamW. New optimizers can be added
    :py:func:`here <neuralhydrology.training.get_optimizer>`.
 
 -  ``loss``: Which loss to use. Currently supported are ``MSE``,
