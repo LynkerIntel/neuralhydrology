@@ -344,9 +344,9 @@ class Config(object):
         else:
             raise RuntimeError(f"Unsupported type {type(duplicate_features)} for 'duplicate_features' argument.")
 
-    @property
-    def dynamic_conceptual_inputs(self) -> List[str]:
-        return self._as_default_list(self._cfg.get("dynamic_conceptual_inputs", []))
+    #@property
+    #def dynamic_conceptual_inputs(self) -> List[str]:
+    #    return self._as_default_list(self._cfg.get("dynamic_conceptual_inputs", []))
 
     @property
     def warmup_period(self) -> int:
